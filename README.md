@@ -1,6 +1,6 @@
 # TopologicalSort
 
-Someone needed to be ble to list gradle dependencies in this way.
+Someone needed to be able to list gradle dependencies in this way.
 
 By adding a gradle task that prints out the dependencies in a convenient way,
 this code can be used to sort the dependencies [https://en.wikipedia.org/wiki/Topological_sorting](topologically) 
