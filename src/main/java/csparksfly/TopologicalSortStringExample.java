@@ -7,7 +7,7 @@ import org.jgrapht.traverse.TopologicalOrderIterator;
 
 import java.util.Iterator;
 
-public class TopologicalSort {
+public class TopologicalSortStringExample {
 
     public static void main(String[] args) {
         Graph<String, DefaultEdge> graph = new DirectedAcyclicGraph<>(DefaultEdge.class);
