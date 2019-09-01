@@ -36,8 +36,7 @@ public class DependencyTopologicalSort {
 
         List<Dependency> dependencies = DependencyBuilder.FromFile("src/test/resources/deps.txt");
 
-
-        List<String> sorted = Show(dependencies);
+        List<String> sorted = DependencyTopologicalSort.Show(dependencies);
         for(String s : sorted) {
             System.out.println(s);
         }
