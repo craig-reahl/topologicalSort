@@ -1,9 +1,7 @@
 package csparksfly;
 
 import csparksfly.gradle.Dependency;
-import csparksfly.gradle.DependencyBuilder;
-import csparksfly.gradle.DependencyGraph;
-import csparksfly.gradle.DependencyTopologicalSort;
+import csparksfly.gradle.MavenModule;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.io.ComponentNameProvider;
@@ -21,26 +19,26 @@ import java.util.List;
 
 public class GraphExport {
 
-    public static void Dot(Graph<String, DefaultEdge> graph, String filename) throws ExportException, IOException {
+    public static void Dot(Graph<MavenModule, DefaultEdge> graph, String filename) throws ExportException, IOException {
 
 
         // adhering to the DOT language restrictions
-        ComponentNameProvider<String> vertexIdProvider = new ComponentNameProvider<String>()
+        ComponentNameProvider<MavenModule> vertexIdProvider = new ComponentNameProvider<MavenModule>()
         {
-            public String getName(String name)
+            public String getName(MavenModule module)
             {
                 //return name.replace('.', '_').replace(":","_");
-                return ""+name.hashCode();
+                return ""+module.hashCode();
             }
         };
-        ComponentNameProvider<String> vertexLabelProvider = new ComponentNameProvider<String>()
+        ComponentNameProvider<MavenModule> vertexLabelProvider = new ComponentNameProvider<MavenModule>()
         {
-            public String getName(String name)
+            public String getName(MavenModule module)
             {
-                return name;
+                return module.getFullModuleSpec();
             }
         };
-        GraphExporter<String, DefaultEdge> exporter =
+        GraphExporter<MavenModule, DefaultEdge> exporter =
                 new DOTExporter<>(vertexIdProvider, vertexLabelProvider, null);
         Writer writer = new StringWriter();
         exporter.exportGraph(graph, writer);
@@ -55,9 +53,9 @@ public class GraphExport {
 
     public static void main(String[] args) throws Exception{
 
-        List<Dependency> dependencies = DependencyBuilder.FromFile("src/test/resources/deps2.txt");
+        List<Dependency> dependencies = Dependency.FromFile("src/test/resources/deps2.txt");
 
-        Graph<String, DefaultEdge> graph = DependencyGraph.Create(dependencies);
+        Graph<MavenModule, DefaultEdge> graph = Dependency.Create(dependencies);
 
         GraphExport.Dot(graph, "src/test/resources/sample.dot" );
         //dot -Tpng src/test/resources/sample.dot  -o src/test/resources/sample.png
