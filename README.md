@@ -24,7 +24,7 @@ run the gradle task and ssave the output:
  gradle printDeps >  /tmp/deps.txt
 ```
 
-then you need to write something like this to parse it [for example](https://github.com/craig-reahl/topologicalSort/blob/master/src/main/java/csparksfly/gradle/DependencyTopologicalSort.java):
+then you need to write something like this to parse it [for example](https://github.com/craig-reahl/topologicalSort/blob/master/src/main/java/csparksfly/gradle/Dependency.java):
 
 ```
     List<Dependency> dependencies = Dependency.FromFile("src/test/resources/deps.txt");
