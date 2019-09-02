@@ -29,11 +29,11 @@ then you need to write something like this to parse it [for example](https://git
 ```
     List<Dependency> dependencies = Dependency.FromFile("src/test/resources/deps.txt");
 
-        Graph<MavenModule, DefaultEdge> graph = Dependency.Create(dependencies);
+    Graph<MavenModule, DefaultEdge> graph = Dependency.Create(dependencies);
 
-        List<MavenModule> sortedTopological = new LinkedList<>();
-        Iterator<MavenModule> iter = new TopologicalOrderIterator<>(graph);
-        while (iter.hasNext()) {
-            System.out.println(s);
-        }
+    List<MavenModule> sortedTopological = new LinkedList<>();
+    Iterator<MavenModule> iter = new TopologicalOrderIterator<>(graph);
+    while (iter.hasNext()) {
+        System.out.println(s);
+    }
 ```
