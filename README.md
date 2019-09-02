@@ -19,10 +19,15 @@ Reference from [https://stackoverflow.com/questions/36536561/is-there-a-way-to-l
     }
 ```
 
-then you need to write something like this [for example](https://github.com/craig-reahl/topologicalSort/blob/master/src/main/java/csparksfly/gradle/DependencyTopologicalSort.java):
+run the gradle task and ssave the output:
+```
+ gradle printDeps >  /tmp/deps.txt
+```
+
+then you need to write something like this to parse it [for example](https://github.com/craig-reahl/topologicalSort/blob/master/src/main/java/csparksfly/gradle/DependencyTopologicalSort.java):
 
 ```
-    List<Dependency> dependencies = DependencyBuilder.FromFile("src/test/resources/deps.txt");
+    List<Dependency> dependencies = DependencyBuilder.FromFile("/tmp/deps.txt");
 
     List<String> sorted = DependencyTopologicalSort.Show(dependencies);
     for(String s : sorted) {
