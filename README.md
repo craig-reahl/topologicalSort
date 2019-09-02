@@ -27,10 +27,13 @@ run the gradle task and ssave the output:
 then you need to write something like this to parse it [for example](https://github.com/craig-reahl/topologicalSort/blob/master/src/main/java/csparksfly/gradle/DependencyTopologicalSort.java):
 
 ```
-    List<Dependency> dependencies = DependencyBuilder.FromFile("/tmp/deps.txt");
+    List<Dependency> dependencies = Dependency.FromFile("src/test/resources/deps.txt");
 
-    List<String> sorted = DependencyTopologicalSort.Show(dependencies);
-    for(String s : sorted) {
-        System.out.println(s);
-    }
+        Graph<MavenModule, DefaultEdge> graph = Dependency.Create(dependencies);
+
+        List<MavenModule> sortedTopological = new LinkedList<>();
+        Iterator<MavenModule> iter = new TopologicalOrderIterator<>(graph);
+        while (iter.hasNext()) {
+            System.out.println(s);
+        }
 ```
