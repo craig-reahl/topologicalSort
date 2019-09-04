@@ -78,7 +78,9 @@ public class Dependency {
         TreeMap<MavenModule, MavenModule> modules = new TreeMap<>();
         List<String> allLines = Files.readAllLines(Paths.get(filename));
         for (String rawLine : allLines) {
-            dependencies.add(Dependency.FromLine(rawLine, modules));
+            if(rawLine.startsWith("from"){
+                dependencies.add(Dependency.FromLine(rawLine, modules));
+            }
         }
 
         return dependencies;
